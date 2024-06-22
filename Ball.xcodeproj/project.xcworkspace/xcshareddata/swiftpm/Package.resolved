@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "motion",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/b3ll/Motion",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6c9cd2a27b36483a8774370d382706257b6dfad1"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics",
+      "state" : {
+        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}
