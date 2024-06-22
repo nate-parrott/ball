@@ -4,6 +4,8 @@
 
 It's a little ball that lives in your dock. You can drag it and it'll bounce around the screen. You can also swipe on it with two fingers. It comes in red. You can flick it, bounce it, try to make it hit the corner, see how many times it can bounce, count how many times it hits the wall, and more. It's a ball. It's fun. It's a ball.
 
+**Download in [Releases](https://github.com/nate-parrott/ball/releases)**
+
 ## Credits
 
 It's inspired by [Nate Heagy's](https://heagy.com/) widget for the OS X Dashboard, which I remember fondly because someone put it on our class [eMac](https://en.wikipedia.org/wiki/EMac) in fifth grade. It was a lot bouncier and come in more colors, but it didn't go in the dock!
