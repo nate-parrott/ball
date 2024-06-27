@@ -1,3 +1,4 @@
+import AVFoundation
 import Cocoa
 import SpriteKit
 import SwiftUI
@@ -12,8 +13,8 @@ class BallViewController: NSViewController {
     let scene = SKScene(size: .init(width: 200, height: 200))
     let sceneView = SKView()
 
-    let collisionSounds: [NSSound] = ["pop_01", "pop_02", "pop_03"].map { id in
-        NSSound(contentsOf: Bundle.main.url(forResource: id, withExtension: "caf")!, byReference: true)!
+    let collisionSounds: [AVAudioPlayer] = ["pop_01", "pop_02", "pop_03"].map { id in
+        try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: id, withExtension: "caf")!)
     }
 
     var targetMouseCatcherRect: CGRect? {
@@ -50,8 +51,7 @@ class BallViewController: NSViewController {
         scene.delegate = self
 
         for sound in collisionSounds {
-            sound.volume = 0
-            sound.play() // Ensure ready to play
+            sound.prepareToPlay()
         }
     }
 
@@ -255,6 +255,10 @@ extension BallViewController: SKPhysicsContactDelegate {
 
         ball?.didCollide(strength: collisionStrength, normal: contact.contactNormal)
 
+        guard let screen = view.window?.screen else { return }
+        // subjective: clamp |pan| <= 0.9 because panning all the way to left or right can sound jarring
+        let pan = remap(x: contact.contactPoint.x, domainStart: screen.frame.minX, domainEnd: screen.frame.maxX, rangeStart: -0.9, rangeEnd: 0.9)
+
         DispatchQueue.global().async {
             var sounds = self.collisionSounds
             sounds.shuffle()
@@ -262,6 +266,7 @@ extension BallViewController: SKPhysicsContactDelegate {
                 return
             }
             soundToUse.volume = Float(collisionStrength)
+            soundToUse.pan = Float(pan)
             soundToUse.play()
         }
     }
