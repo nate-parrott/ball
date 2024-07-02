@@ -5,11 +5,11 @@ class Ball: SKNode {
 
     private let imgOffsetContainer = SKNode()
     /**/ private let imgRotationContainer = SKNode()
-    /****/ private let img = SKSpriteNode(imageNamed: "Ball")
+    private let ballColour = UserDefaults.standard.string(forKey: "selectedBallColour")
+    private var img: SKSpriteNode
 
     let radius: CGFloat
 
-//    let view: NSHostingView<BallView<Circle>>
     private let shadowSprite = SKSpriteNode(imageNamed: "ContactShadow")
     private let shadowContainer = SKNode() // For fading in/out
 
@@ -25,8 +25,8 @@ class Ball: SKNode {
     }
 
     init(radius: CGFloat, pos: CGPoint, id: String) {
-//        self.view = NSHostingView(rootView: BallView(shape: Circle(), radius: radius, color: Color(hex: 0xF84E35)))
-//        self.view.frame = CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
+        img = SKSpriteNode(imageNamed: ballColour!)
+        
         self.id = id
         self.radius = radius
         super.init()
@@ -52,7 +52,6 @@ class Ball: SKNode {
 
         img.size = CGSize(width: radius * 2, height: radius * 2)
         imgRotationContainer.addChild(img)
-//        img.alpha = 0.01
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -72,7 +71,7 @@ class Ball: SKNode {
     }
 
     func update() {
-        shadowSprite.position = CGPoint(x: 0, y: radius * 0.3 - position.y)
+        shadowSprite.position = CGPoint(x: 0, y: (radius * 0.3) - position.y)
         let distFromBottom = position.y - radius
         shadowSprite.alpha = remap(x: distFromBottom, domainStart: 0, domainEnd: 200, rangeStart: 1, rangeEnd: 0)
         imgRotationContainer.xScale = squish.value
@@ -83,17 +82,4 @@ class Ball: SKNode {
         img.setScale(dragScale.value)
     }
 
-    func didCollide(strength: Double, normal: CGVector) {
-        let angle = atan2(normal.dy, normal.dx)
-        imgRotationContainer.zRotation = angle
-        img.zRotation = -angle
-
-        let targetScale = remap(x: strength, domainStart: 0, domainEnd: 1, rangeStart: 1, rangeEnd: 0.8)
-        let velocity = remap(x: strength, domainStart: 0, domainEnd: 1, rangeStart: -5, rangeEnd: -10)
-//        squish.animate(toValue: targetScale, velocity: velocity, completion: nil)
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-//            self.squish.animate(toValue: 1, velocity: self.squish.velocity, completion: nil)
-//        }
-    }
 }

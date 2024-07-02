@@ -11,6 +11,8 @@ class BallViewController: NSViewController {
 
     let scene = SKScene(size: .init(width: 200, height: 200))
     let sceneView = SKView()
+    
+    var ballSize: CGFloat = 1.0
 
     let collisionSounds: [NSSound] = ["pop_01", "pop_02", "pop_03"].map { id in
         NSSound(contentsOf: Bundle.main.url(forResource: id, withExtension: "caf")!, byReference: true)!
@@ -29,10 +31,8 @@ class BallViewController: NSViewController {
         didSet(old) {
             old?.removeFromParent()
             old?.physicsBody = nil
-//            old?.view.removeFromSuperview()
             if let ball {
                 scene.addChild(ball)
-//                view.addSubview(ball.view)
             }
         }
     }
@@ -53,6 +53,8 @@ class BallViewController: NSViewController {
             sound.volume = 0
             sound.play() // Ensure ready to play
         }
+        
+        ballSize = CGFloat(UserDefaults.standard.float(forKey: "ballSize")/100)
     }
 
 
@@ -157,12 +159,16 @@ class BallViewController: NSViewController {
         guard let screen = self.view.window?.screen else { return }
         var targetRect = rect
         targetRect = targetRect.byConstraining(withinBounds: screen.frame)
-
-        let ball = Ball(radius: Constants.radius, pos: .init(x: targetRect.midX, y: targetRect.midY), id: UUID().uuidString)
+        
+        // we need to reload this here
+        ballSize = CGFloat(UserDefaults.standard.float(forKey: "ballSize")/100)
+        let ballRadius = Constants.radius * ballSize
+        NSLog("ballRadius: %f", ballRadius)
+        NSLog("ballSize: %f", ballSize)
+        let ball = Ball(radius: ballRadius, pos: .init(x: targetRect.midX, y: targetRect.midY), id: UUID().uuidString)
         self.ball = ball
 
         dragState = nil
-        // self.ball?.position = CGPoint(x: targetRect.midX, y: targetRect.midY)
 
         // Add impulse to fling ball to center of screen
         let strength: CGFloat = 2000
@@ -182,7 +188,6 @@ class BallViewController: NSViewController {
         ball.setScale(rect.width / (ball.radius * 2))
         let scaleUp = SKAction.scale(to: 1, duration: 0.5)
         ball.run(scaleUp)
-//        ball.physicsBody?.applyImpulse(impulse)
 
         ball.animateShadow(visible: true, duration: 0.5)
 
@@ -234,7 +239,6 @@ extension BallViewController: SKSceneDelegate {
     func didFinishUpdate(for scene: SKScene) {
         if let ball {
             ball.update()
-//            ball.view.setCenter(CGPoint(x: ball.position.x, y: ball.position.y))
         }
     }
 }
@@ -253,16 +257,17 @@ extension BallViewController: SKPhysicsContactDelegate {
         let collisionStrength = remap(x: contact.collisionImpulse, domainStart: minImpulse, domainEnd: maxImpulse, rangeStart: 0, rangeEnd: 0.5)
         guard collisionStrength > 0 else { return }
 
-        ball?.didCollide(strength: collisionStrength, normal: contact.contactNormal)
 
-        DispatchQueue.global().async {
-            var sounds = self.collisionSounds
-            sounds.shuffle()
-            guard let soundToUse = sounds.first(where: { !$0.isPlaying }) else {
-                return
+        if UserDefaults.standard.bool(forKey: "enableDisableSound") {
+            DispatchQueue.global().async {
+                var sounds = self.collisionSounds
+                sounds.shuffle()
+                guard let soundToUse = sounds.first(where: { !$0.isPlaying }) else {
+                    return
+                }
+                soundToUse.volume = Float(collisionStrength)
+                soundToUse.play()
             }
-            soundToUse.volume = Float(collisionStrength)
-            soundToUse.play()
         }
     }
 }

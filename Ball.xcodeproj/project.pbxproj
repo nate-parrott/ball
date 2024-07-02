@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181A7D392C301E3A009240B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 181A7D382C301E3A009240B0 /* Settings.bundle */; };
+		181A7D3E2C317CC2009240B0 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A7D3D2C317CC2009240B0 /* PreferencesViewController.swift */; };
 		5F4617B5297E1747005A09A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4617B4297E1747005A09A6 /* AppDelegate.swift */; };
 		5F4617B7297E1747005A09A6 /* BallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4617B6297E1747005A09A6 /* BallViewController.swift */; };
 		5F4617B9297E1748005A09A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4617B8297E1748005A09A6 /* Assets.xcassets */; };
@@ -29,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181A7D382C301E3A009240B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		181A7D3B2C301F26009240B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		181A7D3D2C317CC2009240B0 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		5F4617B1297E1747005A09A6 /* Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4617B4297E1747005A09A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F4617B6297E1747005A09A6 /* BallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181A7D3C2C317C79009240B0 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				181A7D3D2C317CC2009240B0 /* PreferencesViewController.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		5F4617A8297E1747005A09A6 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +96,7 @@
 		5F4617B3297E1747005A09A6 /* Ball */ = {
 			isa = PBXGroup;
 			children = (
+				181A7D3C2C317C79009240B0 /* Preferences */,
 				5F4617C5297E2B8F005A09A6 /* Info.plist */,
 				5F4617B4297E1747005A09A6 /* AppDelegate.swift */,
 				5F4617D7297F6BFD005A09A6 /* AppController.swift */,
@@ -103,6 +117,7 @@
 				5F4617B8297E1748005A09A6 /* Assets.xcassets */,
 				5F4617BA297E1748005A09A6 /* Main.storyboard */,
 				5F4617BD297E1748005A09A6 /* Ball.entitlements */,
+				181A7D382C301E3A009240B0 /* Settings.bundle */,
 			);
 			path = Ball;
 			sourceTree = "<group>";
@@ -177,6 +192,7 @@
 				5F4617E2297F8FA3005A09A6 /* pop_02.caf in Resources */,
 				5F4617BC297E1748005A09A6 /* Main.storyboard in Resources */,
 				5F4617E6297F9012005A09A6 /* pop_03.caf in Resources */,
+				181A7D392C301E3A009240B0 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +208,7 @@
 				5F4617C7297E2C03005A09A6 /* DockUtils.swift in Sources */,
 				5F736CA5298214FE00997B93 /* InnerShadow.swift in Sources */,
 				5F4617D8297F6BFD005A09A6 /* AppController.swift in Sources */,
+				181A7D3E2C317CC2009240B0 /* PreferencesViewController.swift in Sources */,
 				5F4617B7297E1747005A09A6 /* BallViewController.swift in Sources */,
 				5F4617DA297F6E59005A09A6 /* MouseCatcherView.swift in Sources */,
 				5F4617C4297E17D8005A09A6 /* BallWindowController.swift in Sources */,
@@ -209,6 +226,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5F4617BB297E1748005A09A6 /* Base */,
+				181A7D3B2C301F26009240B0 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -338,7 +356,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPN8ZW6EAC;
+				DEVELOPMENT_TEAM = N3296KDPFX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ball/Info.plist;
@@ -366,7 +384,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VPN8ZW6EAC;
+				DEVELOPMENT_TEAM = N3296KDPFX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ball/Info.plist;
